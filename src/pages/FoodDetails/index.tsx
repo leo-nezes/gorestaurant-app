@@ -73,7 +73,12 @@ const FoodDetails: React.FC = () => {
 
   useEffect(() => {
     async function loadFood(): Promise<void> {
-      // Load a specific food with extras based on routeParams id
+      const response = await api.get(`/foods/${routeParams.id}`);
+
+      const foodDetail = response.data;
+
+      setFood(foodDetail);
+      setExtras(foodDetail.extras);
     }
 
     loadFood();
