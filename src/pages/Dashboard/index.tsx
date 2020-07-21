@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
       const response = await api.get<Food[]>('/foods', {
         params: {
           category_like: selectedCategory,
-          name_like: searchValue,
+          name_like: searchValue || undefined,
         },
       });
 
@@ -87,6 +87,11 @@ const Dashboard: React.FC = () => {
   }, []);
 
   function handleSelectCategory(id: number): void {
+    if (selectedCategory === id) {
+      setSelectedCategory(undefined);
+      return;
+    }
+
     setSelectedCategory(id);
   }
 
